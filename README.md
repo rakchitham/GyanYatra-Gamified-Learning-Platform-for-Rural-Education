@@ -3,6 +3,8 @@
 **GyanYatra** is a **game-based digital learning platform** built with **React** to enhance **STEM learning outcomes** for students in **rural schools (Grades 6–12)**.  
 It is designed to work in **low-connectivity environments** with **multilingual content and offline access**, making learning interactive, fun, and accessible.
 
+**Developers:** Rakchitha M  and Rethiga C.
+
 ---
 
 ## 🎯 Mission
