@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GyanYatra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes blob {
+        0% { transform: translate(0px, 0px) scale(1); }
+        33% { transform: translate(30px, -50px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.9); }
+        100% { transform: translate(0px, 0px) scale(1); }
+      }
+      @keyframes confetti-fall {
+        0% { transform: translateY(-10vh) rotateZ(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) rotateZ(720deg); opacity: 0; }
+      }
+      @keyframes modal-fade-in {
+        from { opacity: 0; transform: translateY(20px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      /* For Chemistry Game */
+      @keyframes molecule-form {
+        0% { transform: scale(0.5); opacity: 0; }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      @keyframes molecule-explode {
+        0% { transform: scale(1) rotate(0deg); opacity: 1; }
+        100% { transform: scale(3) rotate(180deg); opacity: 0; }
+      }
+
+      /* For Biology Game */
+      @keyframes organelle-glow {
+        0%, 100% {
+          box-shadow: 0 0 10px 2px #22d3ee, 0 0 4px 1px #22d3ee inset;
+          border-color: #22d3ee;
+        }
+        50% {
+          box-shadow: 0 0 20px 5px #22d3ee, 0 0 8px 2px #22d3ee inset;
+          border-color: #67e8f9;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "recharts": "https://aistudiocdn.com/recharts@^3.1.2",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-900 text-gray-200">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
