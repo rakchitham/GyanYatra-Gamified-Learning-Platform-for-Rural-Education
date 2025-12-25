@@ -1,1 +1,129 @@
+import React, { useState, useEffect, useCallback } from 'react';
+
+const ORGANELLES = [
+  { id: 'nucleus', name: 'Nucleus', pos: { top: '40%', left: '45%' }, size: 80, question: 'What is the primary role of the Nucleus?', options: ['Energy production', 'Storing DNA', 'Waste disposal'], answer: 'Storing DNA' },
+  { id: 'mitochondria', name: 'Mitochondria', pos: { top: '20%', left: '25%' }, size: 60, question: 'This organelle generates most of the cell\'s supply of ATP.', options: ['Ribosome', 'Nucleus', 'Mitochondria'], answer: 'Mitochondria' },
+  { id: 'ribosome', name: 'Ribosome', pos: { top: '65%', left: '30%' }, size: 40, question: 'What is synthesized in ribosomes?', options: ['Proteins', 'Lipids', 'Carbohydrates'], answer: 'Proteins' },
+  { id: 'membrane', name: 'Cell Membrane', pos: { top: '50%', left: '5%' }, size: 50, question: 'What does the cell membrane control?', options: ['Cell shape', 'Heredity', 'Passage of substances'], answer: 'Passage of substances' },
+];
+
+const PLAYER_SPEED = 10;
+
+const BiologyCellExplorer: React.FC = () => {
+    const [playerPos, setPlayerPos] = useState({ x: 200, y: 150 });
+    const [score, setScore] = useState(0);
+    const [completed, setCompleted] = useState<string[]>([]);
+    const [modal, setModal] = useState<{ isOpen: boolean; organelleId: string | null }>({ isOpen: false, organelleId: null });
+    const [feedback, setFeedback] = useState('');
+
+    const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        if (modal.isOpen) return;
+        setPlayerPos(prev => {
+            let { x, y } = prev;
+            if (e.key === 'ArrowUp') y -= PLAYER_SPEED;
+            else if (e.key === 'ArrowDown') y += PLAYER_SPEED;
+            else if (e.key === 'ArrowLeft') x -= PLAYER_SPEED;
+            else if (e.key === 'ArrowRight') x += PLAYER_SPEED;
+
+            // Simple boundary check (assuming map is ~400x400)
+            x = Math.max(0, Math.min(x, 380));
+            y = Math.max(0, Math.min(y, 380));
+            
+            return { x, y };
+        });
+    }, [modal.isOpen]);
+    
+    const checkInteraction = useCallback(() => {
+        for (const organelle of ORGANELLES) {
+            const organelleEl = document.getElementById(organelle.id);
+            if (!organelleEl) continue;
+            
+            const oX = organelleEl.offsetLeft + organelle.size / 2;
+            const oY = organelleEl.offsetTop + organelle.size / 2;
+            const distance = Math.sqrt(Math.pow(playerPos.x - oX, 2) + Math.pow(playerPos.y - oY, 2));
+            
+            if (distance < organelle.size / 2 && !completed.includes(organelle.id)) {
+                setModal({ isOpen: true, organelleId: organelle.id });
+            }
+        }
+    }, [playerPos, completed]);
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        checkInteraction();
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [handleKeyDown, checkInteraction]);
+
+    const handleAnswer = (answer: string, organelleId: string) => {
+        const organelle = ORGANELLES.find(o => o.id === organelleId);
+        if (!organelle) return;
+        
+        if (answer === organelle.answer) {
+            setScore(prev => prev + 100);
+            setCompleted(prev => [...prev, organelleId]);
+            setFeedback('Correct! Organelle activated.');
+        } else {
+            setFeedback('Incorrect. Try again later.');
+        }
+        
+        setTimeout(() => {
+            setModal({ isOpen: false, organelleId: null });
+            setFeedback('');
+        }, 1500);
+    };
+
+    const organelle = ORGANELLES.find(o => o.id === modal.organelleId);
+
+    return (
+        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start justify-center">
+             <div className="w-full md:w-64 flex-shrink-0 p-4 bg-slate-800 rounded-lg border border-slate-700">
+                <h3 className="text-xl font-bold text-violet-400">Cell Explorer</h3>
+                <p className="text-sm text-gray-400 mt-2">Use arrow keys to move your probe. Touch an organelle to answer a question and activate it!</p>
+                <div className="mt-4">
+                    <p className="font-bold text-white text-lg">Score: <span className="text-amber-400">{score}</span></p>
+                    <p className="font-bold text-white text-lg mt-2">Activated: <span className="text-green-400">{completed.length} / {ORGANELLES.length}</span></p>
+                </div>
+            </div>
+            <div className="relative w-[400px] h-[400px] bg-rose-900/50 rounded-full border-4 border-rose-500">
+                {ORGANELLES.map(o => {
+                    const isCompleted = completed.includes(o.id);
+                    return (
+                        <div
+                            key={o.id}
+                            id={o.id}
+                            className={`absolute flex items-center justify-center rounded-full border-2 cursor-pointer transition-all duration-300 ${isCompleted ? 'bg-cyan-500/50' : 'bg-rose-500/50 border-rose-400'}`}
+                            style={{ top: o.pos.top, left: o.pos.left, width: o.size, height: o.size, animation: isCompleted ? 'organelle-glow 2s infinite' : 'none' }}
+                        >
+                           <span className="text-white text-xs text-center font-bold hidden group-hover:block">{o.name}</span>
+                        </div>
+                    );
+                })}
+                <div className="absolute w-5 h-5 bg-yellow-300 rounded-full" style={{ left: playerPos.x, top: playerPos.y, transform: 'translate(-50%, -50%)' }}></div>
+            </div>
+
+            {modal.isOpen && organelle && (
+                <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-20">
+                    <div className="bg-slate-800 p-6 rounded-lg border border-violet-500 shadow-lg w-full max-w-md">
+                        <h3 className="text-2xl font-bold text-white mb-4">{organelle.name}</h3>
+                        <p className="text-gray-300 mb-6">{organelle.question}</p>
+                        <div className="flex flex-col gap-2">
+                           {organelle.options.map(option => (
+                               <button 
+                                key={option} 
+                                onClick={() => handleAnswer(option, organelle.id)}
+                                className="w-full p-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-white"
+                               >
+                                   {option}
+                               </button>
+                           ))}
+                        </div>
+                         {feedback && <p className={`mt-4 text-center text-sm ${feedback.startsWith('Correct') ? 'text-green-400' : 'text-red-400'}`}>{feedback}</p>}
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default BiologyCellExplorer;
 
