@@ -1,0 +1,45 @@
+import React, { createContext, useState, useContext, useCallback } from 'react';
+import { translations } from '../i18n/translations';
+
+interface LocaleContextType {
+    locale: string;
+    setLocale: (locale: string) => void;
+    t: (key: string, params?: { [key: string]: string | number }) => string;
+}
+
+const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
+
+export const LocaleProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [locale, setLocale] = useState('en');
+
+    const t = useCallback((key: string, params?: { [key: string]: string | number }) => {
+        let text = translations[locale]?.[key] || translations['en']?.[key];
+        
+        if (!text) {
+            console.warn(`Translation key "${key}" not found.`);
+            return key;
+        }
+
+        if (params) {
+            Object.keys(params).forEach(paramKey => {
+                text = text.replace(new RegExp(`{${paramKey}}`, 'g'), String(params[paramKey]));
+            });
+        }
+        
+        return text;
+    }, [locale]);
+
+    return (
+        <LocaleContext.Provider value={{ locale, setLocale, t }}>
+            {children}
+        </LocaleContext.Provider>
+    );
+};
+
+export const useLocale = (): LocaleContextType => {
+    const context = useContext(LocaleContext);
+    if (context === undefined) {
+        throw new Error('useLocale must be used within a LocaleProvider');
+    }
+    return context;
+};

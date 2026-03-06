@@ -1,0 +1,152 @@
+export const LANGUAGES = [
+    { code: 'en', name: 'English' },
+    { code: 'hi', name: 'हिन्दी' }, // Hindi
+    { code: 'bn', name: 'বাংলা' }, // Bengali
+    { code: 'te', name: 'తెలుగు' }, // Telugu
+    { code: 'mr', name: 'मराठी' }, // Marathi
+    { code: 'ta', name: 'தமிழ்' }, // Tamil
+    { code: 'gu', name: 'ગુજરાતી' }, // Gujarati
+    { code: 'ur', name: 'اردو' }, // Urdu
+    { code: 'kn', name: 'ಕನ್ನಡ' }, // Kannada
+    { code: 'or', name: 'ଓଡ଼ିଆ' }, // Odia
+    { code: 'ml', name: 'മലയാളം' }, // Malayalam
+];
+
+export const translations: { [key: string]: { [key: string]: string } } = {
+    en: {
+        // Auth
+        'auth.welcome': 'Welcome to GyanYatra',
+        'auth.tagline': 'Your journey to knowledge begins here.',
+        'auth.signup': 'Sign Up',
+        'auth.login': 'Login',
+        'auth.createAccount': 'Create Account',
+        'auth.startLearning': 'Start Learning! 🚀',
+        'auth.loginPrompt': 'Log in to continue your adventure',
+
+        // Sidebar
+        'sidebar.dashboard': 'Dashboard',
+        'sidebar.tutor': 'AI Tutor',
+        'sidebar.profile': 'My Profile',
+        'sidebar.analytics': 'Analytics',
+        'sidebar.helpTitle': 'Need Help?',
+        'sidebar.helpText': 'Ask our AI Tutor for help with any STEM question!',
+
+        // Header
+        'header.studentDashboard': 'Student Dashboard',
+        'header.teacherDashboard': 'Teacher Dashboard',
+        'header.adminDashboard': 'Admin Dashboard',
+        'header.logout': 'Log out',
+
+        // Student Dashboard
+        'dashboard.welcome': 'Welcome back, {name}!',
+        'dashboard.tagline': 'Ready to conquer new challenges today?',
+        'dashboard.leaderboard': 'Weekly Leaderboard',
+        'dashboard.dailyUpdateTitle': 'Did you know?',
+        'dashboard.quoteTitle': 'Quote of the Day',
+        'dashboard.newQuote': 'New Quote',
+        'dashboard.inspirationTitle': 'Stay Inspired',
+
+
+        // Teacher Analytics
+        'analytics.title': 'Teacher Analytics',
+        'analytics.tagline': 'Overview of class performance and student engagement.',
+        'analytics.engagement': 'Weekly Student Engagement',
+        'analytics.mastery': 'Topic Mastery (Class Average)',
+        'analytics.performance': 'Student Performance Details',
+        'analytics.student': 'Student',
+        'analytics.totalPoints': 'Total Points',
+        'analytics.uploadTitle': 'Upload Class Materials',
+        'analytics.uploadPrompt': 'Drag & drop files here, or click to select',
+        'analytics.uploadButton': 'Upload Files',
+    },
+    hi: {
+        // Auth
+        'auth.welcome': 'ज्ञानयात्रा में आपका स्वागत है',
+        'auth.tagline': 'ज्ञान की ओर आपकी यात्रा यहीं से शुरू होती है।',
+        'auth.signup': 'साइन अप करें',
+        'auth.login': 'लॉग इन करें',
+        'auth.createAccount': 'खाता बनाएं',
+        'auth.startLearning': 'सीखना शुरू करें! 🚀',
+        'auth.loginPrompt': 'अपना साहसिक कार्य जारी रखने के लिए लॉग इन करें',
+
+        // Sidebar
+        'sidebar.dashboard': 'डैशबोर्ड',
+        'sidebar.tutor': 'एआई ट्यूटर',
+        'sidebar.profile': 'मेरी प्रोफ़ाइल',
+        'sidebar.analytics': 'एनालिटिक्स',
+        'sidebar.helpTitle': 'मदद चाहिए?',
+        'sidebar.helpText': 'किसी भी STEM प्रश्न के लिए हमारे AI ट्यूटर से मदद मांगें!',
+
+        // Header
+        'header.studentDashboard': 'छात्र डैशबोर्ड',
+        'header.teacherDashboard': 'शिक्षक डैशबोर्ड',
+        'header.adminDashboard': 'एडमिन डैशबोर्ड',
+        'header.logout': 'लॉग आउट',
+
+        // Student Dashboard
+        'dashboard.welcome': 'वापसी पर स्वागत है, {name}!',
+        'dashboard.tagline': 'आज नई चुनौतियों पर विजय पाने के लिए तैयार हैं?',
+        'dashboard.leaderboard': 'साप्ताहिक लीडरबोर्ड',
+        'dashboard.dailyUpdateTitle': 'क्या आप जानते थे?',
+        'dashboard.quoteTitle': 'आज का विचार',
+        'dashboard.newQuote': 'नया विचार',
+        'dashboard.inspirationTitle': 'प्रेरित रहें',
+
+        // Teacher Analytics
+        'analytics.title': 'शिक्षक एनालिटिक्स',
+        'analytics.tagline': 'कक्षा के प्रदर्शन और छात्र जुड़ाव का अवलोकन।',
+        'analytics.engagement': 'साप्ताहिक छात्र जुड़ाव',
+        'analytics.mastery': 'विषय निपुणता (कक्षा औसत)',
+        'analytics.performance': 'छात्र प्रदर्शन विवरण',
+        'analytics.student': 'छात्र',
+        'analytics.totalPoints': 'कुल अंक',
+        'analytics.uploadTitle': 'कक्षा सामग्री अपलोड करें',
+        'analytics.uploadPrompt': 'फ़ाइलें यहां खींचें और छोड़ें, या चुनने के लिए क्लिक करें',
+        'analytics.uploadButton': 'फ़ाइलें अपलोड करें',
+    },
+    bn: {
+        // Auth
+        'auth.welcome': 'জ্ঞানযাত্রায় আপনাকে স্বাগতম',
+        'auth.tagline': 'জ্ঞানের দিকে আপনার যাত্রা এখান থেকেই শুরু।',
+        'auth.signup': 'সাইন আপ করুন',
+        'auth.login': 'লগইন করুন',
+        'auth.createAccount': 'অ্যাকাউন্ট তৈরি করুন',
+        'auth.startLearning': 'শেখা শুরু করুন! 🚀',
+        'auth.loginPrompt': 'আপনার অভিযান চালিয়ে যেতে লগইন করুন',
+
+        // Sidebar
+        'sidebar.dashboard': 'ড্যাশবোর্ড',
+        'sidebar.tutor': 'এআই টিউটর',
+        'sidebar.profile': 'আমার প্রোফাইল',
+        'sidebar.analytics': 'বিশ্লেষণ',
+        'sidebar.helpTitle': 'সাহায্য প্রয়োজন?',
+        'sidebar.helpText': 'যেকোনো STEM প্রশ্নের জন্য আমাদের AI টিউটরের কাছে সাহায্য চান!',
+
+        // Header
+        'header.studentDashboard': 'শিক্ষার্থী ড্যাশবোর্ড',
+        'header.teacherDashboard': 'শিক্ষক ড্যাশবোর্ড',
+        'header.adminDashboard': 'অ্যাডমিন ড্যাশবোর্ড',
+        'header.logout': 'লগ আউট',
+
+        // Student Dashboard
+        'dashboard.welcome': 'ফিরে আসার জন্য ধন্যবাদ, {name}!',
+        'dashboard.tagline': 'আজ নতুন চ্যালেঞ্জ জয় করতে প্রস্তুত?',
+        'dashboard.leaderboard': 'সাপ্তাহিক লিডারবোর্ড',
+        'dashboard.dailyUpdateTitle': 'আপনি কি জানেন?',
+        'dashboard.quoteTitle': 'দিনের উক্তি',
+        'dashboard.newQuote': 'নতুন উক্তি',
+        'dashboard.inspirationTitle': 'অনুপ্রাণিত থাকুন',
+
+        // Teacher Analytics
+        'analytics.title': 'শিক্ষক বিশ্লেষণ',
+        'analytics.tagline': 'ক্লাসের পারফরম্যান্স এবং শিক্ষার্থীদের অংশগ্রহণের সংক্ষিপ্ত বিবরণ।',
+        'analytics.engagement': 'সাপ্তাহিক শিক্ষার্থী অংশগ্রহণ',
+        'analytics.mastery': 'বিষয় পারদর্শিতা (ক্লাসের গড়)',
+        'analytics.performance': 'শিক্ষার্থীদের পারফরম্যান্সের বিবরণ',
+        'analytics.student': 'ছাত্র',
+        'analytics.totalPoints': 'মোট পয়েন্ট',
+        'analytics.uploadTitle': 'ক্লাস সামগ্রী আপলোড করুন',
+        'analytics.uploadPrompt': 'এখানে ফাইল টেনে আনুন, অথবা নির্বাচন করতে ক্লিক করুন',
+        'analytics.uploadButton': 'ফাইল আপলোড করুন',
+    },
+};
