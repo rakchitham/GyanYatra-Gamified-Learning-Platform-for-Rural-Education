@@ -30,7 +30,6 @@ Our goal is to make **quality STEM education engaging, inclusive, and accessible
 - **Leaderboards** to encourage healthy competition
 - **Adaptive difficulty** based on student performance
 
----
 
 ## 🌍 Multilingual Learning Support
 
